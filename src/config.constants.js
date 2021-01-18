@@ -1,0 +1,1 @@
+export const ROOT_MODULE = 'allyOkr';

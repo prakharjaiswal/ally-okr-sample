@@ -1,0 +1,9 @@
+<div ng-bind="OkrDetailCtrl.okr.title">
+    <div ng-if="OkrDetailCtrl.okr.subOkrs">
+        <ul>
+            <li ng-repeat="okr in OkrDetailCtrl.okr.subOkrs">
+                <okr-details okr="okr"></okr-details>
+            </li>
+        </ul>
+    </div>
+</div>
