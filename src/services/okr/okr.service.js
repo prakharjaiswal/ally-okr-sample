@@ -22,7 +22,7 @@ class OKRService {
         if(!generateCategories) {
             return getOKRsPromise;
         }
-        return getOKRsPromise.then(({data: {data}}) => {
+        return getOKRsPromise.then((data) => {
             let categories = this.parseCategories(data);
             return {categories, okrs: data};
         });
