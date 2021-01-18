@@ -1,8 +1,10 @@
-<div ng-bind="OkrDetailCtrl.okr.title" ng-click="hide=!hide"></div>
-<div ng-if="OkrDetailCtrl.okr.subOkrs" >
-    <ul>
-        <li ng-repeat="okr in OkrDetailCtrl.okr.subOkrs" ng-show="!hide">
-            <okr-details okr="okr"></okr-details>
-        </li>
-    </ul>
+<div class="okr-container" ng-class="{'nested' : OkrDetailCtrl.okr.subOkrs}">
+    <div class="okr" ng-class="{'expanded': !hide}" ng-bind="OkrDetailCtrl.okr.title" ng-click="hide=!hide"></div>
+    <div class="subokrs" ng-if="OkrDetailCtrl.okr.subOkrs" >
+        <ul>
+            <li ng-repeat="okr in OkrDetailCtrl.okr.subOkrs" ng-show="!hide">
+                <okr-details okr="okr"></okr-details>
+            </li>
+        </ul>
+    </div>
 </div>

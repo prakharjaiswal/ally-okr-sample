@@ -1,6 +1,12 @@
-<select ng-model="listOkrCtrl.selectedOKRCategory" ng-options="category as category for category in listOkrCtrl.categories">
-    <option value=''>All</option>
-</select>
-<div ng-repeat="okr in listOkrCtrl.okrs | filter: listOkrCtrl.filterByCategory.bind(listOkrCtrl)">
-    <okr-details okr="okr"></okr-details>
+<div class="okrs">
+    <header class="right">
+        <span class="hide-md">Filter by Category</span>
+        <select class="okrs__select" ng-model="listOkrCtrl.selectedOKRCategory" ng-options="category as category for category in listOkrCtrl.categories">
+            <option value=''>All</option>
+        </select>
+    </header>
+    
+    <div ng-repeat="okr in listOkrCtrl.okrs | filter: listOkrCtrl.filterByCategory.bind(listOkrCtrl)">
+        <okr-details okr="okr"></okr-details>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 import angular from 'angular';
 import {ROOT_MODULE} from '@src/config.constants.js';
+import './listOkr.css';
 
 let okrService;
 class ListOkrsComponent {

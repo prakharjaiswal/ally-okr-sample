@@ -6,8 +6,8 @@ module.exports = {
         './src/index.js'
     ],
     output: {
-        path: `${__dirname}/dist`
-        // filename: '[name].[ext]'
+        path: `${__dirname}/dist`,
+        filename: '[name].[hash].js'
     },
     resolve: {
         alias: {
@@ -19,16 +19,20 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.*\.js$/,
+                test: /.*\.js$/i,
                 use: {
                     loader: 'babel-loader'
                 }
             },
             {
-                test: /\.(html)$/,
+                test: /\.html$/i,
                 use: {
                     loader: 'html-loader'
                 }
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
             }
         ]
     },

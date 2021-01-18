@@ -1,0 +1,33 @@
+
+.okr-container.nested > .okr::before {
+    margin-right: 1em;
+    vertical-align: middle;
+    border-bottom: 0;
+}
+
+.okr-container.nested > .okr.expanded::before {
+    content: '▼';
+}
+
+.okr-container.nested > .okr::before {
+    content: '▶';
+}
+
+.okr {
+    margin: 0.5em 0;
+    line-height: 1.2em;
+    border-bottom: 1px solid #cacaca;
+    border-radius: 0;
+    word-break: break-word;
+}
+
+.subokrs {
+    padding-left: 2em;
+}
+.okr-container.nested{
+    margin: 2em 0;
+}
+.okr-container.nested > .okr {
+    
+    font-weight: bold;
+}

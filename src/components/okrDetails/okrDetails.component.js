@@ -1,6 +1,6 @@
 import angular from 'angular';
 import {ROOT_MODULE} from '@src/config.constants.js';
-
+import './okrDetails.css';
 class OkrDetailsComponent {
     constructor() {
     }
