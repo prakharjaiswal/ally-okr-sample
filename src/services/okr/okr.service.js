@@ -5,7 +5,27 @@ let $http;
 
 
 let arrangeNestedOkrs = (okrs) => {
-    return okrs;
+    let nestedOkrs = [];
+    let mappedOkrs = {};
+    let deferred = [];
+
+    let checkForParent = (okr) => {
+        if(!okr.parent_objective_id) {
+            nestedOkrs.push(okr);
+        }
+        else if(!mappedOkrs[okr.parent_objective_id]){
+            deferred.push(okr);
+            
+        }
+        else {
+            mappedOkrs[okr.parent_objective_id].subOkrs = mappedOkrs[okr.parent_objective_id].subOkrs || [];
+            mappedOkrs[okr.parent_objective_id].subOkrs.push(okr);
+        }
+        mappedOkrs[okr.id] = okr;
+    };
+    okrs.forEach(checkForParent);
+    deferred.forEach(checkForParent);
+    return nestedOkrs;
 };
 
 class OKRService {
@@ -13,19 +33,15 @@ class OKRService {
         $http = http;
     }
 
-    fetchOkrs(generateCategories = false, nested = false) {
-        let getOKRsPromise = $http.get('https://okrcentral.github.io/sample-okrs/db.json')
-                                .then(({data: {data}}) => data);
-        if(nested) {
-            getOKRsPromise = getOKRsPromise.then((data) => arrangeNestedOkrs(data));
-        }
-        if(!generateCategories) {
-            return getOKRsPromise;
-        }
-        return getOKRsPromise.then((data) => {
-            let categories = this.parseCategories(data);
-            return {categories, okrs: data};
-        });
+    fetchOkrs() {
+        return $http.get('https://okrcentral.github.io/sample-okrs/db.json')
+                                .then(({data: {data}}) => data)
+                                .then((data) => {
+                                    let categories = this.parseCategories(data);
+                                    return {categories, okrs: data};
+                                })
+                                .then((result) => ({...result, okrs: arrangeNestedOkrs(result.okrs)}));
+        
     }
 
     parseCategories(data) {
